@@ -69,7 +69,7 @@ while ($row = $stmt->fetch()) {
                                 <a class="nav-link" href="https://discord.gg/ZaYvv4K">Discord</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./launcher">Launcher</a>
+                                <a class="nav-link" href="./launcher/NexusRoleplay-Launcher-Setup.exe">Launcher</a>
                             </li>
                         </ul>
                     </div>
