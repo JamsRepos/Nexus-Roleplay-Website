@@ -1,11 +1,11 @@
 <?php
 
-$filename = '../core/steamauth/steamconfig.php';
+$filename = '../core/steamauth/SteamConfig.php';
 
 if (file_exists($filename)) {
-  require '../core/steamauth/steamconfig.php';
+  require '../core/steamauth/SteamConfig.php';
 } else {
-  require '../steamauth/steamconfig.php';
+  require '../steamauth/SteamConfig.php';
 }
 $return = $steamauth['logoutpage'];
 function checkperm()
