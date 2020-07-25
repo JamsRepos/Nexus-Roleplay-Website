@@ -85,6 +85,14 @@ if (!isset($_SESSION['steamid'])) {
             </nav>
 
             <div class="container mt-5">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Index Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Navbar Settings</a>
+                    </li>
+                </ul>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
@@ -119,12 +127,12 @@ if (!isset($_SESSION['steamid'])) {
                                     <div class="form-group">
                                         <div class="form-group">
                                             <label for="ip">Server IP</label>
-                                            <input type="text" name="ip" class="form-control" id="ip" value="<?=$ip?>" required>
+                                            <input type="text" name="ip" class="form-control" id="ip" value="<?= $ip ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="port">Server Port</label>
-                                        <input type="text" name="port" class="form-control" id="port" value="<?=$port?>" required>
+                                        <input type="text" name="port" class="form-control" id="port" value="<?= $port ?>" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </form>
