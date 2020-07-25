@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+body {
+    background-color: white;
+    color: black;
+    overflow: hidden;
+    font-family: 'Heebo', sans-serif;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    position: relative;
+    outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100vh
+}
+
+.overlay {
+    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
+    background-color: rgba(33, 44, 61, .66);
+}
+
+.navbar {
+    background-color: rgba(33, 44, 61, .46);
+}
+
+.navbar-brand img {
+    width: 4rem;
+}
+
+.nav-link {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.1rem;
+}
+
+.nav-link.active {
+    color: gold !important;
+    opacity: 1 !important;
+}
+
+
+.d-h-90 {
+    height: 90% !important;
+}
+
+
+.serverinfo h1 {
+    color: #fff;
+    font-weight: 800;
+}
+
+.serverinfo h4 {
+    color: #fff;
+    opacity: .5;
+    font-weight: 400;
+}
+
+.serverinfo .btn-nexus {
+    background-color: rgba(53, 184, 71, .25);
+    color: rgba(255, 255, 255, 0.50);
+    padding: .85rem !important;
+    font-size: 1.2rem !important;
+}
+
+.serverinfo .btn-nexus i {
+    color: #35B847
+}
+
+
+.serverinfo .btn-nexus.offline {
+    background-color: rgba(184, 53, 53, .25);
+}
+
+.serverinfo .btn-nexus.offline i {
+    color: #b83535
+}

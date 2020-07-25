@@ -1,0 +1,19 @@
+body {
+    background-color: #212c3d !important;
+}
+
+.navbar {
+    background-color: #29374a !important;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,.32)
+}
+
+.card {
+    background-color: #1e2837;
+    color: #9fa4ae;
+}
+
+.form-control {
+    border: none!important;
+    background-color: #212c3d!important;
+    color: #fff!important;
+}
