@@ -50,7 +50,7 @@ while ($row = $stmt->fetch()) {
         <div class="overlay">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="./">
                         <img src="assets/img/logo.png" alt="<?= $title ?>">
                         <?= $title ?>
                     </a>
@@ -60,16 +60,16 @@ while ($row = $stmt->fetch()) {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Home</a>
+                                <a class="nav-link" href="./">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Store</a>
+                                <a class="nav-link active" href="https://nexushub.io">Store</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Discord</a>
+                                <a class="nav-link" href="https://discord.gg/ZaYvv4K">Discord</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Launcher</a>
+                                <a class="nav-link" href="./launcher">Launcher</a>
                             </li>
                         </ul>
                     </div>
