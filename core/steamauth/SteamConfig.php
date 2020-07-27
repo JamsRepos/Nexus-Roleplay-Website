@@ -68,4 +68,13 @@ if ($statement->rowCount() > 0) {
     $stmt->execute();
 }
 
+$sql = "CREATE TABLE IF NOT EXISTS `nexus_navbar` (
+    sid INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    lname VARCHAR(30) NOT NULL,
+    link VARCHAR(500) NOT NULL,
+    sortby VARCHAR(15) NOT NULL
+
+   )";
+$conn->exec($sql);
+
 

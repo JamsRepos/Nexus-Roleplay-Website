@@ -4,7 +4,7 @@ body {
 
 .navbar {
     background-color: #29374a !important;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,.32)
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .32)
 }
 
 .card {
@@ -13,7 +13,104 @@ body {
 }
 
 .form-control {
+    border: none !important;
+    background-color: #212c3d !important;
+    color: #fff !important;
+}
+
+.tab {
+    overflow: hidden;
+    background-color: #1e2837 !important;
+    border-radius: .25rem;
+}
+
+.tablinks {
+    color: rgba(255,255,255,.5)!important;
+    cursor: pointer;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #29374a;
+}
+
+.tabcontent {
+    margin-top: 2rem;
+    display: none;
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.btn.btn-success {
+    color: #00b300;
+    background: rgba(0,179,0,.2)!important;
     border: none!important;
-    background-color: #212c3d!important;
-    color: #fff!important;
+}
+
+.btn.btn-success:hover {
+    background: rgba(0,179,0,.3)!important;
+}
+
+.btn.btn-info {
+    color: #00dcef;
+    background: rgba(0,220,239,.2)!important;
+    border: none!important
+}
+
+.btn.btn-info:hover {
+    background: rgba(0,220,239,.3)!important;
+}
+
+.btn.btn-warning {
+    color: #ffb300;
+    background: rgba(255,179,0,.2)!important;
+    border: none!important
+}
+
+.btn.btn-warning:hover {
+    background: rgba(255,179,0,.3)!important;
+}
+
+.btn.btn-danger {
+    color: #c50000;
+    background: rgba(197,0,0,.2)!important;
+    border: none!important
+}
+
+.btn.btn-danger:hover {
+    color: #c50000;
+    background: rgba(197,0,0,.3)!important;
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: middle;
+    border-top: none;
+    color: rgba(255,255,255,.5)!important
+}
+
+.table thead th {
+    border-bottom: none!important;
+}
+
+table tbody {
+    border-radius: .25rem;
+}
+
+.table tbody tr {
+    background-color: #212c3d;
+    border-radius: .25rem;
+    color: rgba(255,255,255,.5)!important
+} 
+
+.table tbody tr:nth-child(even) {
+    background-color: #1a2330;
 }

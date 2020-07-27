@@ -50,7 +50,7 @@ while ($row = $stmt->fetch()) {
         <div class="overlay">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="./">
+                    <a class="navbar-brand" href="#">
                         <img src="assets/img/logo.png" alt="<?= $title ?>">
                         <?= $title ?>
                     </a>
@@ -59,18 +59,15 @@ while ($row = $stmt->fetch()) {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="./">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="https://nexushub.io">Store</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://discord.gg/ZaYvv4K">Discord</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./launcher/NexusRoleplay-Launcher-Setup.exe">Launcher</a>
-                            </li>
+                            <?php
+                            $stmt = $conn->prepare('SELECT * FROM nexus_navbar ORDER BY sortby');
+                            $stmt->execute();
+                            while ($row = $stmt->fetch()) {
+                                echo "<li class=\"nav-item\">";
+                                echo "<a class=\"nav-link\" href=\"" . $row['link'] . "\">" . $row['lname'] . "</a>";
+                                echo "</li>";
+                            }
+                            ?>
                         </ul>
                     </div>
                 </div>

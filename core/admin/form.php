@@ -9,8 +9,9 @@ if (!isset($_SESSION['steamid'])) {
     include('../steamauth/userInfo.php');
     checkperm();
 
-    $stitle = $_POST['title'];
-    $motto = $_POST['motto'];
+    $stitle = htmlspecialchars($_POST['title']);
+    $motto = htmlspecialchars_decode($_POST['motto']);
+
     try {
 
         $stmt = $conn->prepare("DROP TABLE IF EXISTS nexus__sitesetting");
@@ -23,11 +24,10 @@ if (!isset($_SESSION['steamid'])) {
        )";
         $conn->exec($sql);
 
-        $stmt = $conn->prepare("INSERT INTO nexus__sitesetting (sname, svalue) VALUES('$stitle', '$motto')");
-        $stmt->execute();
+        $stmt = $conn->prepare("INSERT INTO nexus__sitesetting (sname, svalue) VALUES(?, ?)");
+        $stmt->execute([$stitle, $motto]);
         unset($_POST['title']);
         unset($_POST['motto']);
-        header('Location: ../../admin/index.php');
     } catch (PDOException $e) {
         echo $e->getMessage();
         unset($_POST['title']);

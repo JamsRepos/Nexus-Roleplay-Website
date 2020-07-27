@@ -69,6 +69,11 @@ a:hover {
     opacity: 1 !important;
 }
 
+.navbar-nav .nav-item:nth-child(2) .nav-link {
+    color: gold !important;
+    opacity: 1 !important;
+}
+
 
 .d-h-90 {
     height: 90% !important;
