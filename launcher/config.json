@@ -1,0 +1,66 @@
+{
+    "communityName": "Nexus Roleplay",
+    "logoPath": "https://nexusgta.com/launcher/256.png",
+    "backgroundImages": [
+        {
+            "src": "https://wallpaperaccess.com/full/957583.jpg"
+        },
+        {
+            "src": "https://wallpaperaccess.com/full/957587.jpg"
+        },
+        {
+            "src": "https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700670341.jpg"
+        },
+        {
+            "src": "https://img.gta5-mods.com/q95/images/save-game-44/faa42b-GTA-V-Redux3.jpg"
+        },
+        {
+            "src": "https://wallpaperaccess.com/full/842451.jpg"
+        },
+        {
+            "src": "https://wallpapertag.com/wallpaper/full/b/b/e/141105-gta-5-background-1920x1080-windows.jpg"
+        }
+    ],
+    "buttonText": "Enter the City",
+    "runningText": "Game is Running",
+    "copyrightText": "Copyright © 2013 - 2020 | Nexus Roleplay",
+    "mainColor": "#2a9946",
+    "servers": [
+        {
+            "serverLabel": "Main City",
+            "serverIP": "185.141.207.151:30120"
+        },
+        {
+            "serverLabel": "Training City",
+            "serverIP": "185.141.207.151:30125"
+        },
+        {
+            "serverLabel": "Silver+ Car City",
+            "serverIP": "185.141.207.151:30130"
+        }
+    ],
+    "tabs": [
+        {
+            "tabLabel": "Announcements",
+            "tabPage": "https://nexusgta.com/launcher/tab1.html"
+        },
+        {
+            "tabLabel": "Rules",
+            "tabPage": "https://nexusgta.com/launcher/tab2.html"
+        },
+        {
+            "tabLabel": "Keybinds",
+            "tabPage": "https://nexusgta.com/launcher/tab3.html"
+        }
+    ],
+    "links": [
+        {
+            "linkText": "Discord",
+            "linkHref": "https://discord.gg/ZaYvv4K"
+        },
+        {
+            "linkText": "TeamSpeak",
+            "linkHref": "ts3server://185.141.207.151"
+        }
+    ]
+}
