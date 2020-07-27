@@ -1,4 +1,5 @@
 body {
+    overflow: unset;
     background-color: #212c3d !important;
 }
 
