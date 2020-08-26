@@ -28,15 +28,15 @@
     "servers": [
         {
             "serverLabel": "Main City",
-            "serverIP": "185.141.207.151:30120"
+            "serverIP": "185.38.148.140:30120"
         },
         {
             "serverLabel": "Training City",
-            "serverIP": "185.141.207.151:30125"
+            "serverIP": "185.38.148.140:30125"
         },
         {
             "serverLabel": "Silver+ Car City",
-            "serverIP": "185.141.207.151:30130"
+            "serverIP": "185.38.148.140:30130"
         }
     ],
     "tabs": [
