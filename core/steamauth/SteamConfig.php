@@ -1,8 +1,8 @@
 <?php
 
-$servername = "";
-$dbname = "";
-$username = "";
+$servername = "db.hexaneweb.com";
+$dbname = "polited1_nexusrp";
+$username = "polited1_nexusrp";
 $password = "";
 
 //Version 4.0
@@ -77,4 +77,68 @@ $sql = "CREATE TABLE IF NOT EXISTS `nexus_navbar` (
    )";
 $conn->exec($sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS `nexus_permissions` (
+    `id` int(10) UNSIGNED NOT NULL,
+    `display_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 
+   )";
+$conn->exec($sql);
+
+$statement = $conn->prepare('SELECT * FROM nexus_permissions');
+$statement->execute();
+if ($statement->rowCount() > 0) {
+} else {
+    $sql = "INSERT INTO `nexus_permissions` (`id`, `display_name`, `description`) VALUES
+            (1, 'General Settings', 'Edit general settings & server ip'),
+            (2, 'Navbar Settings', 'Edit navigation links'),
+            (3, 'View Users', 'View all the users signed up'),
+            (4, 'Permissions Settings', 'Be able to change users permissions');
+
+            )";
+    $conn->exec($sql);
+}
+
+$sql = "CREATE TABLE IF NOT EXISTS `nexus_permission_user` (
+    `permission_id` int(10) UNSIGNED NOT NULL,
+    `user_steamid` VARCHAR(50) NOT NULL
+
+   )";
+$conn->exec($sql);
+
+$sql = "CREATE TABLE IF NOT EXISTS `nexus_forms` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` TEXT NOT NULL,
+	`pic` TEXT NOT NULL,
+	`created_by` INT NOT NULL,
+	`orderby` INT NOT NULL,
+    `cooldown` INT DEFAULT '0',
+	PRIMARY KEY (`id`)
+    )";
+$conn->exec($sql);
+
+$sql = "CREATE TABLE IF NOT EXISTS `nexus_questions` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `form_id` int(11) NOT NULL,
+    `type` text NOT NULL,
+    `question` text NOT NULL,
+    `placeholder` text NOT NULL,
+    `selectables` text,
+    `orderby` text(11) NOT NULL,
+    `created_by` text(11) NOT NULL,
+      PRIMARY KEY (`id`)
+  )";
+$conn->exec($sql);
+
+$sql = "CREATE TABLE IF NOT EXISTS `nexus_apps` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`form_id` INT NOT NULL,
+	`data` LONGTEXT NOT NULL,
+	`status` TEXT NOT NULL DEFAULT 'pending',
+	`userid` TEXT NOT NULL,
+	`date_created` TEXT NOT NULL,
+	`date_updated` TEXT,
+    `reason` TEXT DEFAULT 'No reason given.',
+	PRIMARY KEY (`id`)
+);";
+$conn->exec($sql);
