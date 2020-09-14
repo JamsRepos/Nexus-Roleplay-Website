@@ -9,14 +9,18 @@ if (!isset($_SESSION['steamid'])) {
     include('../steamauth/userInfo.php');
     checkperm();
 
-    $perm = permcheck(2);
+    $perm = permcheck(6);
     if ($perm) {
 
         $id = $_POST['id'];
+        $status = $_POST['status'];
+        $reason = $_POST['reason'];
+        $date = new DateTime();
+        $date = $date->getTimestamp();
         try {
 
-            $stmt = $conn->prepare("DELETE FROM nexus_navbar WHERE sid = ?");
-            $stmt->execute([$id]);
+            $stmt = $conn->prepare("UPDATE `nexus_apps` SET `status` = ?, `reason` = ?, `date_updated` = ? WHERE `id` = ?;");
+            $stmt->execute([$status, $reason, $date, $id]);
 
             unset($_POST['id']);
         } catch (PDOException $e) {

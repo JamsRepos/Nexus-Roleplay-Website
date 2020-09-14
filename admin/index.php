@@ -68,7 +68,7 @@ if (!isset($_SESSION['steamid'])) {
                             $stmt->execute();
                             while ($row = $stmt->fetch()) {
                                 echo "<li class=\"nav-item me\">";
-                                echo "<a class=\"nav-link\" href=\"".$row['link']."\">".$row['lname']."</a>";
+                                echo "<a class=\"nav-link\" href=\"" . $row['link'] . "\">" . $row['lname'] . "</a>";
                                 echo "</li>";
                             }
                             ?>
@@ -87,182 +87,23 @@ if (!isset($_SESSION['steamid'])) {
 
             <div class="container mt-5">
                 <nav class="nav nav-pills nav-fill tab">
-                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'General')">General Settings</a>
+                    <a role="button" class="nav-item nav-link tablinks active" onclick="openTab(event, 'General')">General Settings</a>
                     <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Nav')">NavBar Settings</a>
                     <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Users')">Users</a>
+                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Apps')">Applications</a>
                 </nav>
-                <div id="General" class="tabcontent">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    Index Settings
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="name">Community Name</label>
-                                            <input type="text" name="title" class="form-control" id="name" value="<?= $title ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="motto">Motto</label>
-                                        <input type="text" name="motto" class="form-control" id="motto" value="<?= $motto ?>" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-info" onclick="updateIndex()">Update</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    Server Settings
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="ip">Server IP</label>
-                                            <input type="text" name="ip" class="form-control" id="ip" value="<?= $ip ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="port">Server Port</label>
-                                        <input type="text" name="port" class="form-control" id="port" value="<?= $port ?>" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-info" onclick="updateServer()">Update</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="General" class="tabcontent" style="display: block;">
+                    <?php include('includes/settings.php'); ?>
                 </div>
 
                 <div id="Nav" class="tabcontent">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    Create a Link
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="form-group">
-                                                    <label for="name">Title</label>
-                                                    <input type="text" name="title" class="form-control" id="nname" placeholder="Forums" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="link">Link</label>
-                                                <input type="text" name="link" class="form-control" id="nlink" placeholder="https:/gg.gg/forums/" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="sort">Sort Order</label>
-                                                <input type="number" name="sort" class="form-control" id="nsort" placeholder="1" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-info" onclick="addLink()">Create</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 mt-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    View Links
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th width="5%" scope="col">#</th>
-                                                    <th width="40%" scope="col">Name</th>
-                                                    <th width="40%" scope="col">Link</th>
-                                                    <th width="5%" class="text-center" scope="col">Sort</th>
-                                                    <th width="10%" class="text-center" scope="col">Manage</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="links">
-                                                <?php
-                                                $stmt = $conn->prepare('SELECT * FROM nexus_navbar ORDER BY sortby');
-                                                $stmt->execute();
-                                                while ($row = $stmt->fetch()) {
-                                                    echo "<tr id=\"" . $row['sid'] . "\">";
-                                                    echo "
-                                                    <th scope=\"row\">" . $row['sid'] . "</th>
-                                                    <td>" . $row['lname'] . "</td>
-                                                    <td>" . $row['link'] . "</td>
-                                                    <td class=\"text-center\">" . $row['sortby'] . "</td>
-                                                    <td class=\"text-center\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"dLink(" . $row['sid'] . ")\">DELETE</button></td>
-                                                    ";
-                                                    echo "</tr>";
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php include('includes/nav_settings.php'); ?>
                 </div>
                 <div id="Users" class="tabcontent">
-                    <div class="row">
-
-                        <div class="col-md-12 mt-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    View Users
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th width="5%" scope="col">#</th>
-                                                    <th width="35%" scope="col">Name</th>
-                                                    <th width="35%" scope="col">SteamID</th>
-                                                    <th width="5%" class="text-center" scope="col">Permissions</th>
-                                                    <th width="20%" class="text-center" scope="col">Manage</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="users">
-                                                <?php
-                                                $stmt = $conn->prepare('SELECT * FROM nexus_siteusers ORDER BY uid');
-                                                $stmt->execute();
-                                                while ($row = $stmt->fetch()) {
-                                                    if ($row['pid'] == 1) {
-                                                        $btn = "<td class=\"text-center\"><button type=\"button\" onclick=\"mUser('0', " . $row['uid'] . ")\" class=\"btn btn-warning\">REMOVE ADMIN</button></td>";
-                                                    } else {
-                                                        $btn = "<td class=\"text-center\"><button type=\"button\" onclick=\"mUser('1', " . $row['uid'] . ")\" class=\"btn btn-warning\">MAKE ADMIN</button></td>";
-                                                    }
-                                                    echo "<tr>";
-                                                    echo "
-                                                    <th scope=\"row\">" . $row['uid'] . "</th>
-                                                    <td>" . $row['steamname'] . "</td>
-                                                    <td>" . $row['steamid'] . "</td>
-                                                    <td class=\"text-center\">" . $row['pid'] . "</td>
-                                                    $btn
-                                                    ";
-                                                    echo "</tr>";
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php include('includes/user_settings.php'); ?>
+                </div>
+                <div id="Apps" class="tabcontent">
+                    <?php include('includes/app_settings.php'); ?>
                 </div>
             </div>
         </div>

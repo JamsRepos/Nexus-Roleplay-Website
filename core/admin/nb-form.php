@@ -9,22 +9,26 @@ if (!isset($_SESSION['steamid'])) {
     include('../steamauth/userInfo.php');
     checkperm();
 
-    $name = $_POST['title'];
-    $link = $_POST['link'];
-    $sb = $_POST['sort'];
-    try {
+    $perm = permcheck(2);
+    if ($perm) {
 
-        $stmt = $conn->prepare("INSERT INTO nexus_navbar (lname, link, sortby) VALUES('$name', '$link', '$sb')");
-        $stmt->execute();
+        $name = $_POST['title'];
+        $link = $_POST['link'];
+        $sb = $_POST['sort'];
+        try {
 
-        unset($_POST['title']);
-        unset($_POST['link']);
-        unset($_POST['sort']);
-        header('Location: ../../admin/index.php');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-        unset($_POST['title']);
-        unset($_POST['link']);
-        unset($_POST['sort']);
+            $stmt = $conn->prepare("INSERT INTO nexus_navbar (lname, link, sortby) VALUES('$name', '$link', '$sb')");
+            $stmt->execute();
+
+            unset($_POST['title']);
+            unset($_POST['link']);
+            unset($_POST['sort']);
+            header('Location: ../../admin/index.php');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            unset($_POST['title']);
+            unset($_POST['link']);
+            unset($_POST['sort']);
+        }
     }
 }
