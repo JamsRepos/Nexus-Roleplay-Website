@@ -14,6 +14,7 @@ if (!isset($_SESSION['steamid'])) {
     $uid = $_SESSION['steamid'];
     $date = new DateTime();
     $date = $date->getTimestamp();
+    $reason = "No reason given.";
 
     $stmt = $conn->prepare('SELECT * FROM nexus_forms WHERE id=? LIMIT 1');
     $stmt->execute([$fid]);
@@ -41,7 +42,7 @@ if (!isset($_SESSION['steamid'])) {
         /*$stmt = $conn->prepare("INSERT INTO nexus_apps (form_id, data, status, userid, date_created) VALUES(?, ?, ?, ?, ?)");
         $stmt->execute([$fid, $data, $status, $uid, $date]);*/
 
-        $stmt = $conn->prepare("INSERT INTO nexus_apps (form_id, data, status, userid, date_created) VALUES(:fid, :data, :status, :userid, :date)");
+        $stmt = $conn->prepare("INSERT INTO nexus_apps (form_id, data, status, userid, date_created, reason) VALUES(:fid, :data, :status, :userid, :date, :reason)");
         $stmt->bindParam(':fid', $fid, PDO::PARAM_INT);
         $stmt->bindParam(':data', $data, PDO::PARAM_STR);
         $stmt->bindParam(':status', $status, PDO::PARAM_STR);

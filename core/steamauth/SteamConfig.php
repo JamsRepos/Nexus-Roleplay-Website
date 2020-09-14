@@ -134,11 +134,11 @@ $sql = "CREATE TABLE IF NOT EXISTS `nexus_apps` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`form_id` INT NOT NULL,
 	`data` LONGTEXT NOT NULL,
-	`status` TEXT NOT NULL DEFAULT 'pending',
+	`status` TEXT NOT NULL,
 	`userid` TEXT NOT NULL,
 	`date_created` TEXT NOT NULL,
 	`date_updated` TEXT,
-    `reason` TEXT DEFAULT 'No reason given.',
+    `reason` TEXT,
 	PRIMARY KEY (`id`)
 );";
 $conn->exec($sql);
