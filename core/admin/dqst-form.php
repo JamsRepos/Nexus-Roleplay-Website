@@ -9,13 +9,13 @@ if (!isset($_SESSION['steamid'])) {
     include('../steamauth/userInfo.php');
     checkperm();
 
-    $perm = permcheck(2);
+    $perm = permcheck(5);
     if ($perm) {
 
         $id = $_POST['id'];
         try {
 
-            $stmt = $conn->prepare("DELETE FROM nexus_navbar WHERE sid = ?");
+            $stmt = $conn->prepare("DELETE FROM nexus_questions WHERE id=?");
             $stmt->execute([$id]);
 
             unset($_POST['id']);

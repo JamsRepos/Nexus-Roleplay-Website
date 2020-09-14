@@ -9,20 +9,28 @@ if (!isset($_SESSION['steamid'])) {
     include('../steamauth/userInfo.php');
     checkperm();
 
-    $stmt = $conn->prepare('SELECT * FROM nexus_siteusers ORDER BY uid');
-    $stmt->execute();
-    while ($row = $stmt->fetch()) {
-        if ($row['pid'] == 1) {
-            $btn = "<td class=\"text-center\"><button type=\"button\" onclick=\"mUser(0, ".$row['uid'].")\" class=\"btn btn-warning\">REMOVE ADMIN</button></td>";
-        } else {
-            $btn = "<td class=\"text-center\"><button type=\"button\" onclick=\"mUser(1, ".$row['uid'].")\" class=\"btn btn-warning\">MAKE ADMIN</button></td>";
+    $perm = permcheck(3);
+    if ($perm) {
+
+        $stmt2 = $conn->prepare('SELECT * FROM `nexus_siteusers` WHERE steamid=:steamid LIMIT 1');
+        $stmt2->bindParam(':steamid', $_SESSION['steamid'], PDO::PARAM_INT);
+        $stmt2->execute();
+
+        $result = $stmt2->fetch();
+        $myLvl = $result['pid'];
+
+        $stmt = $conn->prepare('SELECT * FROM nexus_siteusers WHERE pid<?');
+        $stmt->execute([$myLvl]);
+        while ($row = $stmt->fetch()) {
+            echo "<tr>";
+            echo "
+                                                    <th scope=\"row\">" . $row['uid'] . "</th>
+                                                    <td>" . $row['steamname'] . "</td>
+                                                    <td>" . $row['steamid'] . "</td>
+                                                    <td class=\"text-center\">" . $row['pid'] . "</td>
+                                                    <td class=\"text-center\"><button type=\"button\" data-toggle=\"modal\" data-target=\"#permModal\" onclick=\"oUser(" . $row['steamid'] . ")\" class=\"btn btn-warning\">EDIT PERMISSIONS</button></td>
+                                                    ";
+            echo "</tr>";
         }
-        echo "<tr>";
-        echo "<th scope=\"row\">" . $row['uid'] . "</th>
-            <td>" . $row['steamname'] . "</td>
-            <td>" . $row['steamid'] . "</td>
-            <td class=\"text-center\">" . $row['pid'] . "</td>
-            $btn";
-        echo "</tr>";
     }
 }

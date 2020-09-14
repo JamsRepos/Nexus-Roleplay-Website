@@ -1,27 +1,17 @@
 <?php
+require('../core/steamauth/SteamConfig.php');
 require('../core/steamauth/steamauth.php');
 
 if (!isset($_SESSION['steamid'])) {
-    echo "<div style='margin: 30px auto; text-align: center;'>Welcome Guest! Please log in!<br>";
-    loginbutton();
-    echo "</div>";
+    header("Location: ../login");
 } else {
-    require('../core/admin/permcheck.php');
     include('../core/steamauth/userInfo.php');
-    checkperm();
 
     $stmt = $conn->prepare('SELECT * FROM nexus__sitesetting');
     $stmt->execute();
     while ($row = $stmt->fetch()) {
         $title = $row['sname'];
         $motto = $row['svalue'];
-    }
-
-    $stmt = $conn->prepare('SELECT * FROM nexus_serverlist');
-    $stmt->execute();
-    while ($row = $stmt->fetch()) {
-        $ip = $row['serverip'];
-        $port = $row['serverport'];
     }
 
 ?>
@@ -33,7 +23,7 @@ if (!isset($_SESSION['steamid'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title><?= $title ?></title>
+        <title><?= $title ?> | <?= $_SESSION['steam_personaname'] ?></title>
         <meta name="description" content="<?= $motto ?>">
         <meta name="og:title" content="<?= $title ?>">
         <meta name="og:description" content="<?= $motto ?>">
@@ -46,7 +36,7 @@ if (!isset($_SESSION['steamid'])) {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="../assets/js/admin.js"></script>
+        <script src="../assets/js/main.js"></script>
 
     </head>
 
@@ -84,26 +74,28 @@ if (!isset($_SESSION['steamid'])) {
                     </div>
                 </div>
             </nav>
+        </div>
 
-            <div class="container mt-5">
-                <nav class="nav nav-pills nav-fill tab">
-                    <a role="button" class="nav-item nav-link tablinks active" onclick="openTab(event, 'General')">General Settings</a>
-                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Nav')">NavBar Settings</a>
-                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Users')">Users</a>
-                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Apps')">Applications</a>
-                </nav>
-                <div id="General" class="tabcontent" style="display: block;">
-                    <?php include('includes/settings.php'); ?>
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <nav class="nav nav-pills nav-fill tab">
+                        <a role="button" class="nav-item nav-link tablinks active" onclick="openTab(event, 'Pending')">Pending</a>
+                        <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Accepted')">Accepted</a>
+                        <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Denied')">Denied</a>
+                    </nav>
                 </div>
+                <div class="card-body">
+                    <div id="Pending" class="tabcontent" style="display: block;">
+                        <?php include('includes/pending.php'); ?>
+                    </div>
 
-                <div id="Nav" class="tabcontent">
-                    <?php include('includes/nav_settings.php'); ?>
-                </div>
-                <div id="Users" class="tabcontent">
-                    <?php include('includes/user_settings.php'); ?>
-                </div>
-                <div id="Apps" class="tabcontent">
-                    <?php include('includes/app_settings.php'); ?>
+                    <div id="Accepted" class="tabcontent">
+                        <?php include('includes/accepted.php'); ?>
+                    </div>
+                    <div id="Denied" class="tabcontent">
+                        <?php include('includes/denied.php'); ?>
+                    </div>
                 </div>
             </div>
         </div>

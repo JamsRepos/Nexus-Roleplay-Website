@@ -1,27 +1,17 @@
 <?php
+require('../core/steamauth/SteamConfig.php');
 require('../core/steamauth/steamauth.php');
 
 if (!isset($_SESSION['steamid'])) {
-    echo "<div style='margin: 30px auto; text-align: center;'>Welcome Guest! Please log in!<br>";
-    loginbutton();
-    echo "</div>";
+    header("Location: ../login");
 } else {
-    require('../core/admin/permcheck.php');
     include('../core/steamauth/userInfo.php');
-    checkperm();
 
     $stmt = $conn->prepare('SELECT * FROM nexus__sitesetting');
     $stmt->execute();
     while ($row = $stmt->fetch()) {
         $title = $row['sname'];
         $motto = $row['svalue'];
-    }
-
-    $stmt = $conn->prepare('SELECT * FROM nexus_serverlist');
-    $stmt->execute();
-    while ($row = $stmt->fetch()) {
-        $ip = $row['serverip'];
-        $port = $row['serverport'];
     }
 
 ?>
@@ -46,7 +36,6 @@ if (!isset($_SESSION['steamid'])) {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <script src="../assets/js/admin.js"></script>
 
     </head>
 
@@ -85,26 +74,19 @@ if (!isset($_SESSION['steamid'])) {
                 </div>
             </nav>
 
-            <div class="container mt-5">
-                <nav class="nav nav-pills nav-fill tab">
-                    <a role="button" class="nav-item nav-link tablinks active" onclick="openTab(event, 'General')">General Settings</a>
-                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Nav')">NavBar Settings</a>
-                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Users')">Users</a>
-                    <a role="button" class="nav-item nav-link tablinks" onclick="openTab(event, 'Apps')">Applications</a>
-                </nav>
-                <div id="General" class="tabcontent" style="display: block;">
-                    <?php include('includes/settings.php'); ?>
-                </div>
-
-                <div id="Nav" class="tabcontent">
-                    <?php include('includes/nav_settings.php'); ?>
-                </div>
-                <div id="Users" class="tabcontent">
-                    <?php include('includes/user_settings.php'); ?>
-                </div>
-                <div id="Apps" class="tabcontent">
-                    <?php include('includes/app_settings.php'); ?>
-                </div>
+            <div class="container mt-5" id="loadme">
+                <?php
+                    if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        ?>
+                        <script>
+                            $("#loadme").load("includes/apply.php?id=<?=$id?>");
+                        </script>
+                        <?php
+                    } else {
+                        include('includes/forms.php');
+                    }
+                ?>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

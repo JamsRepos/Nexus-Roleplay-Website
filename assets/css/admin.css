@@ -50,7 +50,7 @@ body {
     }
 }
 
-.btn.btn-success {
+.btn.btn-success, .alert-success {
     color: #00b300;
     background: rgba(0,179,0,.2)!important;
     border: none!important;
@@ -60,7 +60,17 @@ body {
     background: rgba(0,179,0,.3)!important;
 }
 
-.btn.btn-info {
+.btn.btn-secondary, .alert-secondary {
+    color: #6c757d;
+    background: rgba(108,117,125,.2)!important;
+    border: none!important
+}
+
+.btn.btn-secondary:hover {
+    background: rgba(108,117,125,.3)!important;
+}
+
+.btn.btn-info, .alert-info {
     color: #00dcef;
     background: rgba(0,220,239,.2)!important;
     border: none!important
@@ -70,7 +80,7 @@ body {
     background: rgba(0,220,239,.3)!important;
 }
 
-.btn.btn-warning {
+.btn.btn-warning, .alert-warning {
     color: #ffb300;
     background: rgba(255,179,0,.2)!important;
     border: none!important
@@ -80,7 +90,7 @@ body {
     background: rgba(255,179,0,.3)!important;
 }
 
-.btn.btn-danger {
+.btn.btn-danger, .alert-danger {
     color: #c50000;
     background: rgba(197,0,0,.2)!important;
     border: none!important
@@ -114,4 +124,13 @@ table tbody {
 
 .table tbody tr:nth-child(even) {
     background-color: #1a2330;
+}
+
+.modal-content {
+    background-color: #1e2837;
+    color: #9fa4ae;
+}
+
+.modal-header, .modal-footer {
+    border-color: rgba(0,0,0,.125)
 }

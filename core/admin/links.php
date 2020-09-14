@@ -9,15 +9,19 @@ if (!isset($_SESSION['steamid'])) {
     include('../steamauth/userInfo.php');
     checkperm();
 
-    $stmt = $conn->prepare('SELECT * FROM nexus_navbar ORDER BY sortby');
-    $stmt->execute();
-    while ($row = $stmt->fetch()) {
-        echo "<tr id=\"" . $row['sid'] . "\">";
-        echo "<th scope=\"row\">" . $row['sid'] . "</th>
+    $perm = permcheck(2);
+    if ($perm) {
+
+        $stmt = $conn->prepare('SELECT * FROM nexus_navbar ORDER BY sortby');
+        $stmt->execute();
+        while ($row = $stmt->fetch()) {
+            echo "<tr id=\"" . $row['sid'] . "\">";
+            echo "<th scope=\"row\">" . $row['sid'] . "</th>
         <td>" . $row['lname'] . "</td>
         <td>" . $row['link'] . "</td>
         <td class=\"text-center\">" . $row['sortby'] . "</td>
         <td class=\"text-center\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"dLink(" . $row['sid'] . ")\">DELETE</button></td>";
-        echo "</tr>";
+            echo "</tr>";
+        }
     }
 }

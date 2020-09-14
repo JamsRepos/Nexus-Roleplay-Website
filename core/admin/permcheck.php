@@ -14,8 +14,22 @@ function checkperm()
   $stmt = $conn->prepare("SELECT pid from nexus_siteusers where steamid = ?");
   $stmt->execute([$_SESSION['steamid']]);
   $pid = $stmt->fetchColumn();
-  if ($pid != 1) {
+  if ($pid < 1) {
     header("Location: ../");
     die();
   }
+}
+
+function permcheck($id)
+{
+  global $conn;
+  $stmt = $conn->prepare("SELECT * FROM `nexus_permission_user` where user_steamid = ? AND permission_id = ?");
+  $stmt->execute([$_SESSION['steamid'], $id]);
+  $pid = $stmt->fetchColumn();
+  if ($pid < 1) {
+    $perm = false;
+  } else {
+    $perm = true;
+  }
+  return $perm;
 }
