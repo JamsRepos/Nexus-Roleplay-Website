@@ -1,8 +1,8 @@
 <?php
 
-$servername = "db.hexaneweb.com";
-$dbname = "polited1_nexusrp";
-$username = "polited1_nexusrp";
+$servername = "";
+$dbname = "";
+$username = "";
 $password = "";
 
 //Version 4.0
